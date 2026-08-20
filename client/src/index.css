@@ -125,7 +125,7 @@ select {
   font-variant-numeric: tabular-nums;
 }
 
-/* App shell — phone column centered on desktop */
+/* App shell — full width on desktop, phone column on small screens */
 .app {
   position: relative;
   width: 100%;
@@ -134,7 +134,17 @@ select {
   background: var(--bg);
 }
 
-@media (min-width: 520px) {
+/* On wider screens, remove the 480px cap so the app fills the window */
+@media (min-width: 769px) {
+  .app {
+    max-width: 100%;
+    border-left: none;
+    border-right: none;
+    box-shadow: none;
+  }
+}
+
+@media (min-width: 520px) and (max-width: 768px) {
   .app {
     border-left: 1px solid var(--border);
     border-right: 1px solid var(--border);
@@ -882,16 +892,16 @@ select.field-input {
   padding: 0 16px 16px;
 }
 
-/* Landscape mode: side-by-side columns — everything on screen */
-@media (orientation: landscape) and (min-width: 600px) {
+/* Wide-screen mode: side-by-side columns — everything on screen */
+@media (min-width: 769px) {
   .match-layout {
     flex-direction: row;
     height: 100dvh;
   }
 
   .match-left {
-    flex: 0 0 42%;
-    max-width: 42%;
+    flex: 0 0 45%;
+    max-width: 45%;
     border-right: 1px solid var(--border);
     display: flex;
     flex-direction: column;
@@ -911,16 +921,16 @@ select.field-input {
   }
 
   .match-left .team-block .score-runs {
-    font-size: 18px;
+    font-size: 22px;
   }
 
   .match-left .team-block .score-detail {
-    font-size: 10px;
+    font-size: 11px;
   }
 
   .match-left-scroll {
     flex: 1;
-    overflow-y: auto;
+    overflow-y: hidden;
     padding: 4px 8px 4px;
     display: flex;
     flex-direction: column;
@@ -929,7 +939,7 @@ select.field-input {
 
   /* Field view — fit to available height */
   .match-left .field-view {
-    width: min(260px, calc(100% - 8px));
+    width: min(320px, calc(100% - 8px));
     flex-shrink: 0;
   }
 
@@ -955,31 +965,31 @@ select.field-input {
 
   .match-right-scroll {
     flex: 1;
-    overflow-y: auto;
+    overflow-y: hidden;
     padding: 4px 10px 4px;
     display: flex;
     flex-direction: column;
   }
 
-  /* Option cards HORIZONTAL in landscape */
+  /* Option cards HORIZONTAL in wide mode */
   .match-right .options-section {
     flex-direction: row;
-    gap: 6px;
+    gap: 8px;
     margin-bottom: 6px;
   }
 
   .match-right .option-card {
     flex: 1;
-    padding: 8px 10px;
+    padding: 10px 12px;
     min-width: 0;
   }
 
   .match-right .option-name {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .match-right .option-desc {
-    font-size: 10px;
+    font-size: 11px;
     margin-top: 2px;
   }
 
@@ -1022,6 +1032,41 @@ select.field-input {
 
   .match-right .timer-row {
     margin-bottom: 4px;
+  }
+
+  .match-right .waiting-card {
+    padding: 20px 16px;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .match-right .status-card {
+    padding: 10px 12px;
+  }
+
+  .match-right .status-batting {
+    gap: 2px;
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+  }
+
+  .match-right .option-card {
+    padding: 10px 12px;
+  }
+
+  .match-right .ball-result {
+    padding: 10px 12px;
+  }
+
+  /* Over-ball strip compact */
+  .over-balls {
+    padding: 4px 8px;
+  }
+
+  .over-balls .ball-dot {
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
   }
 }
 
